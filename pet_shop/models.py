@@ -12,8 +12,9 @@ class Animal(models.Model):
     age = models.FloatField()
     weight = models.FloatField()
     sex = models.CharField(max_length=255)
-    group_id = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
 
 class Characteristic(models.Model):
     name = models.CharField(max_length=255)
+    animal_list = models.ManyToManyField(Animal, related_name="characteristics")
