@@ -12,7 +12,7 @@ class Animal(models.Model):
     age = models.FloatField()
     weight = models.FloatField()
     sex = models.CharField(max_length=255)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group_id = models.ForeignKey(Group, on_delete=models.CASCADE)
 
 
 class Characteristic(models.Model):
