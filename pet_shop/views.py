@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 
 from pet_shop.models import Animal, Characteristic, Group
 from pet_shop.serializers import (
-    AnimalSerializer,
+    AnimalCharacteristicSerializer,
     CharacteristicSerializer,
     GroupSerializer,
 )
@@ -31,6 +31,6 @@ class AnimalView(APIView):
     def get(self, _):
         animal = Animal.objects.all()
 
-        serialized = AnimalSerializer(animal, many=True)
+        serialized = AnimalCharacteristicSerializer(animal, many=True)
 
         return Response(serialized.data)

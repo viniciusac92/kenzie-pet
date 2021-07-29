@@ -24,3 +24,6 @@ class Animal(models.Model):
 class Characteristic(models.Model):
     name = models.CharField(max_length=255)
     animal_list = models.ManyToManyField(Animal, related_name="characteristics")
+
+    def __str__(self):
+        return self.name
