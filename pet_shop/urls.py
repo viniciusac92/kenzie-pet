@@ -1,5 +1,5 @@
 from django.urls import path
 
-from .views import KenziePetView
+from .views import GroupView
 
-urlpatterns = [path('pet_shop', KenziePetView.as_view())]
+urlpatterns = [path('group', GroupView.as_view())]

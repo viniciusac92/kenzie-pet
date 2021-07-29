@@ -5,8 +5,8 @@ from pet_shop.models import Group
 from pet_shop.serializers import GroupSerializer
 
 
-class KenziePetView(APIView):
-    def get(self, request):
+class GroupView(APIView):
+    def get(self, _):
         group = Group.objects.all()
 
         serialized = GroupSerializer(group, many=True)
