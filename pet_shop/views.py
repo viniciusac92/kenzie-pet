@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -35,6 +36,19 @@ class AnimalView(APIView):
         serialized = AnimalCharacteristicSerializer(animals, many=True)
 
         return Response(serialized.data)
+
+    def post(self, request):
+
+        serializer = AnimalCharacteristicSerializer(data=request)
+
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        animal = Animal.objects.get_or_create(**serializer.validated_data)[0]
+
+        serializer = AnimalCharacteristicSerializer(animal)
+
+        return Response(serializer.data)
 
 
 class AnimalRetrieveView(APIView):
