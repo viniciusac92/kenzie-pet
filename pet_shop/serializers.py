@@ -10,7 +10,7 @@ class GroupSerializer(serializers.Serializer):
     scientific_name = serializers.CharField()
 
 
-class AnimaSerializer(serializers.Serializer):
+class AnimalSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
     age = serializers.FloatField()
@@ -22,4 +22,4 @@ class AnimaSerializer(serializers.Serializer):
 class CharacteristicSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
-    animal_list = AnimaSerializer(many=True, read_only=True, source='animal_list')
+    animal_list = AnimalSerializer(many=True, read_only=True, source='group')
