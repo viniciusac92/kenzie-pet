@@ -5,11 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from pet_shop.models import Animal, Characteristic, Group
-from pet_shop.serializers import (
-    AnimalCharacteristicSerializer,
-    CharacteristicSerializer,
-    GroupSerializer,
-)
+from pet_shop.serializers import AnimalCharacteristicSerializer
 
 
 class AnimalView(APIView):
@@ -49,25 +45,25 @@ class AnimalView(APIView):
 
         return Response(serializer.data)
 
-    def delete(self, _, animal_id=''):
+
+class AnimalRetrieveView(APIView):
+    def get(self, _, animal_id):
+        if animal_id:
+            try:
+                animal = Animal.objects.get(id=animal_id)
+                serialized = AnimalCharacteristicSerializer(animal)
+                return Response(serialized.data)
+
+            except ObjectDoesNotExist:
+                return Response({'message': 'Id not found'})
+
+    def delete(self, _, animal_id):
         if animal_id:
             try:
                 animal = get_object_or_404(Animal, id=animal_id)
                 animal.delete()
 
                 return Response(status=status.HTTP_204_NO_CONTENT)
-
-            except ObjectDoesNotExist:
-                return Response({'message': 'Id not found'})
-
-
-class AnimalRetrieveView(APIView):
-    def get(self, _, animal_id=''):
-        if animal_id:
-            try:
-                animal = Animal.objects.get(id=animal_id)
-                serialized = AnimalCharacteristicSerializer(animal)
-                return Response(serialized.data)
 
             except ObjectDoesNotExist:
                 return Response({'message': 'Id not found'})
