@@ -1,7 +1,4 @@
 from rest_framework import serializers
-from rest_framework.fields import FloatField
-
-from pet_shop.models import Characteristic, Group
 
 
 class GroupSerializer(serializers.Serializer):
