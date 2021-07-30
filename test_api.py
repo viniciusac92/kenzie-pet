@@ -12,10 +12,7 @@ class TestAnimalView(TestCase):
             "weight": 30,
             "sex": "female",
             "group": {"name": "cão", "scientific_name": "canis familiaris"},
-            "characteristics": [
-                {"name": "peludo"},
-                {"name": "medio porte"},
-            ],
+            "characteristics": [{"name": "peludo"}, {"name": "medio porte"}],
         }
 
         self.animal_data_2 = {
@@ -24,10 +21,7 @@ class TestAnimalView(TestCase):
             "weight": 20,
             "sex": "female",
             "group": {"name": "gato", "scientific_name": "felis catus"},
-            "characteristics": [
-                {"name": "peludo"},
-                {"name": "pequeno porte"},
-            ],
+            "characteristics": [{"name": "peludo"}, {"name": "pequeno porte"}],
         }
 
         self.animal_data_3 = {
@@ -36,10 +30,7 @@ class TestAnimalView(TestCase):
             "weight": 10,
             "sex": "male",
             "group": {"name": "papagaio", "scientific_name": "amazona"},
-            "characteristics": [
-                {"name": "com penas"},
-                {"name": "com bico"},
-            ],
+            "characteristics": [{"name": "com penas"}, {"name": "com bico"}],
         }
 
         self.animal_data_4 = {
@@ -48,10 +39,7 @@ class TestAnimalView(TestCase):
             "weight": 30,
             "sex": "female",
             "group": {"name": "cão", "scientific_name": "canis familiaris"},
-            "characteristics": [
-                {"name": "peludo"},
-                {"name": "medio porte"},
-            ],
+            "characteristics": [{"name": "peludo"}, {"name": "medio porte"}],
         }
 
     def test_create_animal(self):
