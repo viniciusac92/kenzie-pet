@@ -11,24 +11,6 @@ from pet_shop.serializers import (
 )
 
 
-class GroupView(APIView):
-    def get(self, _):
-        group = Group.objects.all()
-
-        serialized = GroupSerializer(group, many=True)
-
-        return Response(serialized.data)
-
-
-class CharacteristicView(APIView):
-    def get(self, _):
-        characteristic = Characteristic.objects.all()
-
-        serialized = CharacteristicSerializer(characteristic, many=True)
-
-        return Response(serialized.data)
-
-
 class AnimalView(APIView):
     def get(self, _):
         animals = Animal.objects.all()
