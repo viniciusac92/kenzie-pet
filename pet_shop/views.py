@@ -47,7 +47,7 @@ class AnimalView(APIView):
 
         serializer = AnimalCharacteristicSerializer(animal_create_data)
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class AnimalRetrieveView(APIView):
