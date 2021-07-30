@@ -41,24 +41,28 @@ class AnimalView(APIView):
         serializer = AnimalCharacteristicSerializer(data=request.data)
 
         if not serializer.is_valid():
-            import ipdb
-
-            ipdb.set_trace()
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         validated_data = serializer.validated_data
 
-        group = validated_data.pop('group')
+        group_request_data = validated_data.pop('group')
+        group_create_data = Group.objects.get_or_create(**group_request_data)[0]
 
-        characteristics = validated_data.pop('characteristics')
+        characteristics = validated_data.pop('characteristics_related')
+        charac_list = []
 
-        import ipdb
+        for charac in characteristics:
+            charac_prepared = Characteristic.objects.get_or_create(name=charac['name'])[
+                0
+            ]
+            charac_list.append(charac_prepared)
 
-        ipdb.set_trace()
+        animal_create_data = Animal.objects.get_or_create(
+            **validated_data, group=group_create_data
+        )[0]
+        animal_create_data.characteristics_related.set(charac_list)
 
-        animal = Animal.objects.get_or_create(**serializer.validated_data)[0]
-
-        serializer = AnimalCharacteristicSerializer(animal)
+        serializer = AnimalCharacteristicSerializer(animal_create_data)
 
         return Response(serializer.data)
 

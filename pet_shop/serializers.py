@@ -22,7 +22,12 @@ class AnimalSerializer(serializers.Serializer):
 class CharacteristicSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
-    animal_list = AnimalSerializer(many=True, read_only=True, source='group')
+    animal_list = AnimalSerializer(many=True, source='group')
+
+
+class CharacteristicSimpleSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField()
 
 
 class AnimalCharacteristicSerializer(serializers.Serializer):
@@ -32,6 +37,6 @@ class AnimalCharacteristicSerializer(serializers.Serializer):
     weight = serializers.FloatField()
     sex = serializers.CharField()
     group = GroupSerializer()
-    characteristic = CharacteristicSerializer(
-        many=True, read_only=True, source='characteristics'
+    characteristics = CharacteristicSimpleSerializer(
+        many=True, source='characteristics_related'
     )
