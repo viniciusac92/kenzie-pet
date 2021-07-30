@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -47,6 +48,17 @@ class AnimalView(APIView):
         serializer = AnimalCharacteristicSerializer(animal_create_data)
 
         return Response(serializer.data)
+
+    def delete(self, _, animal_id=''):
+        if animal_id:
+            try:
+                animal = get_object_or_404(Animal, id=animal_id)
+                animal.delete()
+
+                return Response(status=status.HTTP_204_NO_CONTENT)
+
+            except ObjectDoesNotExist:
+                return Response({'message': 'Id not found'})
 
 
 class AnimalRetrieveView(APIView):
