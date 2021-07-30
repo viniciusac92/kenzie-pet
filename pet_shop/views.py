@@ -38,11 +38,23 @@ class AnimalView(APIView):
         return Response(serialized.data)
 
     def post(self, request):
-
-        serializer = AnimalCharacteristicSerializer(data=request)
+        serializer = AnimalCharacteristicSerializer(data=request.data)
 
         if not serializer.is_valid():
+            import ipdb
+
+            ipdb.set_trace()
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        validated_data = serializer.validated_data
+
+        group = validated_data.pop('group')
+
+        characteristics = validated_data.pop('characteristics')
+
+        import ipdb
+
+        ipdb.set_trace()
 
         animal = Animal.objects.get_or_create(**serializer.validated_data)[0]
 
