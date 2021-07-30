@@ -55,7 +55,9 @@ class AnimalRetrieveView(APIView):
                 return Response(serialized.data)
 
             except ObjectDoesNotExist:
-                return Response({'message': 'Id not found'})
+                return Response(
+                    {'message': 'Id not found'}, status=status.HTTP_404_NOT_FOUND
+                )
 
     def delete(self, _, animal_id):
         if animal_id:
@@ -66,4 +68,6 @@ class AnimalRetrieveView(APIView):
                 return Response(status=status.HTTP_204_NO_CONTENT)
 
             except ObjectDoesNotExist:
-                return Response({'message': 'Id not found'})
+                return Response(
+                    {'message': 'Id not found'}, status=status.HTTP_404_NOT_FOUND
+                )
