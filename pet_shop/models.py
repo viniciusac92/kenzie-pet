@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.deletion import CASCADE
 
 
 class Group(models.Model):
@@ -23,7 +22,7 @@ class Animal(models.Model):
 
 class Characteristic(models.Model):
     name = models.CharField(max_length=255)
-    animal_list = models.ManyToManyField(Animal, related_name="characteristics")
+    animal_list = models.ManyToManyField(Animal, related_name="characteristics_related")
 
     def __str__(self):
         return self.name
